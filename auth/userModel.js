@@ -15,7 +15,7 @@ function addUser(user){
     name: user.name
   }
 
-  return db('users').insert(newUser)
+  return db('users').insert(newUser, "id")
     .then( ids =>{
       return addRole(ids, user.role)
         .then(id =>{
@@ -45,5 +45,5 @@ function addRole(userId, roleId){
     user_id: userId,
     role_id: roleId
   }
-  return db('user_roles').insert(role)
+  return db('user_roles').insert(role, 'id')
 }
