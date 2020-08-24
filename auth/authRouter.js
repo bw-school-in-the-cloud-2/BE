@@ -25,7 +25,9 @@ router.post('/register', (req, res) =>{
       console.log(err);
       if(err.message.includes('UNIQUE constraint failed: users.email')){
         res.status(500).json({error: 'this email is already taken'})
-      } else {
+      } else if(err.message.includes('constraint failed: user_roles.role_id')){
+        res.status(500).json({error: 'please include a user role'})
+      } {
         res.status(500).json(err.message)
       }
     })

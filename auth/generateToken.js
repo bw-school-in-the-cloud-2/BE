@@ -6,7 +6,8 @@ module.exports = function generateToken(user){
 	
 	const payload = {
 		subject: user.id,
-		email: user.email
+		email: user.email,
+		role: user.role
 	}
 
 const secret = secrets.secret_JWT
