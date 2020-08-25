@@ -16,3 +16,4 @@ Here is a table with the `endpoint` descriptions:
 | :------------------------- | :---------------------- | :----- | :------------------------ |
 | Register a user            | /api/auth/register      | POST   | the new user with role + a token    |
 | LogIn a user               | /api/auth/login         | POST   | the user + a token    |
+| Volunteers                 | api/volunteers          | GET    | array of all volunters with their availability time slots |

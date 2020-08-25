@@ -16,10 +16,17 @@ function addUser(user){
   }
 
   return db('users').insert(newUser, "id")
-    .then( ids =>{
-      return addRole(ids, user.role)
-        .then(id =>{
-          return getUserById(ids)
+    .then( userId =>{
+      return addRole(userId, user.role)
+        .then(roleId =>{
+          if(user.role === 3){
+            return addCountry(userId, user.country)
+              .then(countryId =>{
+                return getUserById(userId)
+              })
+          } else {
+            return getUserById(userId)
+          }
         })
     })
 }
@@ -46,4 +53,12 @@ function addRole(userId, roleId){
     role_id: roleId
   }
   return db('user_roles').insert(role, 'id')
+}
+
+function addCountry(userId, country){
+  const record ={
+    user_id: userId,
+    country
+  }
+  return db('user_country').insert(record ,'id')
 }

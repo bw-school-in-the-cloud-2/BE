@@ -1,14 +1,14 @@
 const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcrypt')
-const Users = require('./userModel')
+const Users = require('./authModel')
 const generateToken = require('./generateToken')
 
 // ======= api/auth ======
 
 
 router.post('/register', (req, res) =>{
-
+//TODO: validate data before adding to database
   const hash = bcrypt.hashSync(req.body.password, 8);
 
   const newUser = {
@@ -27,7 +27,9 @@ router.post('/register', (req, res) =>{
         res.status(500).json({error: 'this email is already taken'})
       } else if(err.message.includes('constraint failed: user_roles.role_id')){
         res.status(500).json({error: 'please include a user role'})
-      } {
+      } else if(err.message.includes('constraint failed: user_country.country')){
+        res.status(500).json({error: 'please add the volunteers country'})
+      } else {
         res.status(500).json(err.message)
       }
     })
