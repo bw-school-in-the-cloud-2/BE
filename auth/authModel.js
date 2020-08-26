@@ -54,7 +54,7 @@ function addRole(userId, roleId){
   }
   return db('user_roles').insert(role, 'id')
     .then(id =>{
-      return id
+      return id[0]
     })
 }
 
@@ -65,6 +65,6 @@ function addCountry(userId, country){
   }
   return db('user_country').insert(record ,'id')
     .then(id =>{
-      return id
+      return id[0]
     })
 }
