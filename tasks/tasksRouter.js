@@ -21,9 +21,6 @@ router.post('/', (req, res) => {
   }
 })
 
-router.get('/', (req, res) => {
-  
-})
 
 router.get('/volunteer/:voluteerId', (req, res) => {
   Tasks.getTasksByVolunteerId(req.params.voluteerId)
