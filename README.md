@@ -21,36 +21,41 @@ Here is a table with the `endpoint` descriptions:
 | Update a task by id        | /api/tasks/:id          | PUT    | the updated task |
 | Delete a task by id        | /api/tasks/:id          | DELETE  | Delete message |
 | Show tasks asigned to volunteer | /api/tasks/:volunteerId | GET | Array of all tasks assigned to specific volunteer |
+| Create a new time slot |  /api/availability   | POST  | The new time slot |
+| Show Time Slots per volunteer | /api/availability/user/:id | GET | Array of timeSlots assigned to specific Volunteer |
+| Edit a Time Slot   | /api/availability/:id |PUT |The updated time slot |
+| Delete a Time Slot |/api/availability/:id | DELETE | Delete Message
 
+## Use Cases
 
-[+] On-boarding for three user types: `admin`, `student`, and `volunteer`. Each user type will have their own view.
+On-boarding for three user types: `admin`, `student`, and `volunteer`. Each user type will have their own view.
   /login
   /register
 
-[+] Ability for an `admin` to create and edit a training “`tasks`” volunteers to complete. Saving a to do list will make it appear on the volunteers homepage.
+[ ] Ability for an `admin` to create and edit a training “`tasks`” volunteers to complete. Saving a to do list will make it appear on the volunteers homepage.
 
-[+] Homepage for `volunteer` to view their `tasks` from an `admin`.
+[ ] Homepage for `volunteer` to view their `tasks` from an `admin`.
   get /tasks/:volunteerid
 
-[+] Homepage for `student`s to see the profiles of all registered `volunteers`. They can search by their listed `availability time`s, or their `country`.
+[ ] Homepage for `student`s to see the profiles of all registered `volunteers`. They can search by their listed `availability time`s, or their `country`.
 
-all
-[+]POST /Register
-[+]POST /login
+### all
+[ ]POST /Register
+[ ]POST /login
 
-admin 
-[+]POST /tasks
-[+]PUT /tasks
-[+]Delete /tasks
+### admin 
+[ ]POST /tasks
+[ ]PUT /tasks
+[ ]Delete /tasks
 
 
-volunteer
-[+]GET /tasks/volunteer/:volunteerid
+### volunteer
+[ ]GET /tasks/volunteer/:volunteerid
 [ ] Post /availability   - create new time slot 
 [ ] Get /availability - show time slots
 [ ] Put /availability - edit time slot 
 [ ] Delete /availability - delete time slot 
 
 
-student
-[+] GET /volunteers
+### student
+[ ] GET /volunteers
