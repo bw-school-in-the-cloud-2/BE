@@ -3,12 +3,14 @@ const server = express();
 
 const authRouter = require('../auth/authRouter')
 const volunteersRouter = require('../volunteers/volunteersRouter')
+const tasksRouter = require('../tasks/tasksRouter')
 const protected = require('../utils/protected')
 
 server.use(express.json());
 
 server.use('/api/auth', authRouter)
 server.use('/api/volunteers', volunteersRouter)
+server.use('/api/tasks', tasksRouter)
 
 
 server.get('/',  (req, res) => {
