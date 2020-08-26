@@ -14,9 +14,9 @@ server.use(cors());
 server.use(express.json());
 
 server.use('/api/auth', authRouter)
-server.use('/api/volunteers', volunteersRouter)
-server.use('/api/tasks', tasksRouter)
-server.use('/api/availability', calendarRouter)
+server.use('/api/volunteers', protected, volunteersRouter)
+server.use('/api/tasks', protected, tasksRouter)
+server.use('/api/availability',protected, calendarRouter)
 
 
 server.get('/',  (req, res) => {

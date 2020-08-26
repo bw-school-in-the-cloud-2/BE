@@ -26,7 +26,7 @@ router.post('/', (req, res) => {
         res.status(500).json(err.message)
       })
   } else {
-    res.status(400).json({message: 'Please include the user_id, the day, the start time and end time'})
+    res.status(400).json({message: 'Please include the user_id, the day, the start_time and end_time'})
   }
 })
 
@@ -41,7 +41,7 @@ router.put('/:id', (req, res) => {
       res.status(500).json(err.message)
     })
 } else {
-  res.status(400).json({message: 'Please include the user_id, the day, the start time and end time'})
+  res.status(400).json({message: 'Please include the user_id, the day, the time_start and time_end'})
 }
 })
 
