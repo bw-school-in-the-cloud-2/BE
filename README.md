@@ -40,22 +40,23 @@ On-boarding for three user types: `admin`, `student`, and `volunteer`. Each user
 [ ] Homepage for `student`s to see the profiles of all registered `volunteers`. They can search by their listed `availability time`s, or their `country`.
 
 ### all
-[ ]POST /Register
-[ ]POST /login
+* POST /Register
+* POST /login
 
 ### admin 
-[ ]POST /tasks
-[ ]PUT /tasks
-[ ]Delete /tasks
+* POST /tasks
+* PUT /tasks
+* Delete /tasks
 
 
-### volunteer
-[ ]GET /tasks/volunteer/:volunteerid
-[ ] Post /availability   - create new time slot 
-[ ] Get /availability - show time slots
-[ ] Put /availability - edit time slot 
-[ ] Delete /availability - delete time slot 
+### volunteer:
+
+* GET /tasks/volunteer/:volunteerid
+* POST /availability   - create new time slot 
+* GET /availability - show time slots
+* PUT /availability - edit time slot 
+* DELETE /availability - delete time slot 
 
 
-### student
-[ ] GET /volunteers
+### student
+*  GET /volunteers
