@@ -6,7 +6,7 @@ const Tasks = require('./tasksModel')
 //======== /api/tasks =====
 
 router.post('/', (req, res) => {
-  //TODO: check if volunteer exists
+
   if(req.body.volunteer_id && req.body.description){
     Tasks.addTask(req.body)
       .then( task =>{
