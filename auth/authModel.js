@@ -17,15 +17,15 @@ function addUser(user){
 
   return db('users').insert(newUser, 'id')
     .then( userId =>{
-      return addRole(userId, user.role)
+      return addRole(userId[0], user.role)
         .then(roleId =>{
           if(user.role === 3){
-            return addCountry(userId, user.country)
+            return addCountry(userId[0], user.country)
               .then(countryId =>{
-                return getUserById(userId)
+                return getUserById(userId[0])
               })
           } else {
-            return getUserById(userId)
+            return getUserById(userId[0])
           }
         })
     })
