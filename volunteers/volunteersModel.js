@@ -28,6 +28,6 @@ function getVolunteers(){
 
 function getAvailability(id){
   return db('availability')
-    .select('day', 'time_start', 'time_end')
+    .select('id','day', 'time_start', 'time_end')
     .where('user_id', id)
 }
