@@ -6,6 +6,7 @@ const server = express();
 const authRouter = require('../auth/authRouter')
 const volunteersRouter = require('../volunteers/volunteersRouter')
 const tasksRouter = require('../tasks/tasksRouter')
+const calendarRouter = require('../calendar/calendarRouter')
 const protected = require('../utils/protected')
 
 server.use(helmet());
@@ -15,6 +16,7 @@ server.use(express.json());
 server.use('/api/auth', authRouter)
 server.use('/api/volunteers', volunteersRouter)
 server.use('/api/tasks', tasksRouter)
+server.use('/api/availability', calendarRouter)
 
 
 server.get('/',  (req, res) => {
