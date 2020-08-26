@@ -10,12 +10,12 @@ module.exports = {
 function addTask(task){
   return db('tasks').insert(task, 'id')
     .then( id =>{
-      return getTaskById(id)
+      return getTaskById(id[0])
     })
 }
 
 function getTaskById(id){
-  return db('tasks').where({id}).first()
+  return db('tasks').select('*').where({id}).first()
 }
 
 function getTasksByVolunteerId(volunteerId){
