@@ -7,16 +7,16 @@ const authRouter = require('../auth/authRouter')
 const volunteersRouter = require('../volunteers/volunteersRouter')
 const tasksRouter = require('../tasks/tasksRouter')
 const calendarRouter = require('../calendar/calendarRouter')
-const protected = require('../utils/protected')
+const protectedRoute = require('../utils/protected')
 
 server.use(helmet());
 server.use(cors());
 server.use(express.json());
 
 server.use('/api/auth', authRouter)
-server.use('/api/volunteers', protected, volunteersRouter)
-server.use('/api/tasks', protected, tasksRouter)
-server.use('/api/availability',protected, calendarRouter)
+server.use('/api/volunteers', protectedRoute, volunteersRouter)
+server.use('/api/tasks', protectedRoute, tasksRouter)
+server.use('/api/availability',protectedRoute, calendarRouter)
 
 
 server.get('/',  (req, res) => {
