@@ -7,16 +7,9 @@ const generateToken = require('./generateToken')
 // ======= api/auth ======
 
 
-router.post('/register', (req, res) =>{
+router.post('/register', validateUser, (req, res) =>{
 //TODO: validate data before adding to database
 
-  if(!req.body.email || !req.body.password || !req.body.name || !req.body.role){
-    res.status(400).json({message: 'please include email, password, name, and role'})
-  } else if(req.body.role === 3 && !req.body.country){
-    res.status(400).json({message: 'Please add a country for the'})
-  }else if(req.body.role > 3) {
-    res.status(400).json({message: 'This is not a valid role'})
-  }else{
     const hash = bcrypt.hashSync(req.body.password, 8);
     const newUser = {
       ...req.body,
@@ -30,15 +23,12 @@ router.post('/register', (req, res) =>{
       })
       .catch(err =>{
         console.log(err);
-        if(err.message.includes('UNIQUE constraint failed: users.email')){
+        if(err.message.includes('UNIQUE constraint failed: users.email') || err.message.includes('users_email_unique')){
           res.status(500).json({error: 'this email is already taken'})
         } else {
           res.status(500).json(err.message)
         }
       })
-  }
-
-
 })
 
 router.post('/login', (req, res) => {
@@ -58,5 +48,16 @@ router.post('/login', (req, res) => {
     })
 })
 
+function validateUser(req, res, next){
+  if(!req.body.email || !req.body.password || !req.body.name || !req.body.role){
+    res.status(400).json({message: 'please include email, password, name, and role'})
+  } else if(req.body.role === 3 && !req.body.country){
+    res.status(400).json({message: 'Please add a country for the'})
+  }else if(req.body.role > 3 || (typeof req.body.role === 'string')) {
+    res.status(400).json({message: `${req.body.role} is not a valid role. Only accepts 1 for student, 2 for admin, 3 for volunteer`})
+  }else{
+    next()
+  }
+}
 
 module.exports = router

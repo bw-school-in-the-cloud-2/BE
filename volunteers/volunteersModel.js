@@ -1,7 +1,8 @@
 const db = require('../data/dbConfig')
 
 module.exports = {
-  getVolunteers
+  getVolunteers,
+  getVolunteerById
 }
 
 function getVolunteers(){
@@ -24,6 +25,15 @@ function getVolunteers(){
         }
           return newArray
       })
+}
+
+function getVolunteerById(id){
+  return db('users')
+    .select('users.id', 'users.email', 'users.name','roles.role', 'user_country.country')
+    .join('user_roles', 'user_roles.user_id', 'users.id')
+    .join('roles', 'user_roles.role_id', 'roles.id')
+    .leftJoin('user_country', 'user_country.user_id','users.id' )
+    .where('users.id', id).first()
 }
 
 function getAvailability(id){

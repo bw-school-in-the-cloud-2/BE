@@ -2,9 +2,11 @@ const express = require('express');
 const router = express.Router()
 
 const Calendar = require('./calendarModel')
+const Volunteers = require('../volunteers/volunteersModel')
+const checkVolunteer = require('../utils/checkVolunteer')
 //=======/api/availability =======
 
-router.get('/user/:id', (req, res) => {
+router.get('/user/:id', checkVolunteerId, (req, res) => {
   Calendar.getTimesByUserId(req.params.id)
     .then(timeSlots =>{
       res.status(200).json(timeSlots)
@@ -15,7 +17,7 @@ router.get('/user/:id', (req, res) => {
     })
 })
 
-router.post('/', (req, res) => {
+router.post('/', checkVolunteer, (req, res) => {
   if(req.body.user_id && req.body.day && req.body.time_start && req.body.time_end){
     Calendar.addTimeSlot(req.body)
       .then(timeSlot =>{
@@ -30,7 +32,7 @@ router.post('/', (req, res) => {
   }
 })
 
-router.put('/:id', (req, res) => {
+router.put('/:id', checkVolunteer, (req, res) => {
   if(req.body.user_id && req.body.day && req.body.time_start && req.body.time_end){
   Calendar.editTimeSlotById(req.params.id, req.body)
     .then(timeSlot =>{
@@ -45,7 +47,7 @@ router.put('/:id', (req, res) => {
 }
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', checkVolunteer, (req, res) => {
   Calendar.deleteTimeSlotById(req.params.id)
     .then( count => {
       res.status(200).json({message: `deleted ${count} record`})
@@ -57,5 +59,17 @@ router.delete('/:id', (req, res) => {
 })
 
 //TODO: check if user with id exists mw and role
+
+function checkVolunteerId(req, res, next){
+  Volunteers.getVolunteerById(req.params.id)
+    .then(volunteer =>{
+      if(volunteer && volunteer.role === 'volunteer'){
+        next()
+      } else {
+        res.status(404).json({message: 'A volunteer with that id does not exist'})
+      }
+    })
+}
+
 
 module.exports = router 

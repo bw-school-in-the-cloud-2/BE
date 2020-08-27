@@ -11,7 +11,7 @@ module.exports = function protectedRoute(req, res, next){
         res.status(401).json({message: 'Token is not valid'})
       } else {
         //token is good and we have info
-        req.jwt = decodedToken // add token data to req obj
+        req.decodedToken = decodedToken // add token data to req obj
 
         next()
       }
