@@ -8,8 +8,6 @@ const generateToken = require('./generateToken')
 
 
 router.post('/register', validateUser, (req, res) =>{
-//TODO: validate data before adding to database
-
     const hash = bcrypt.hashSync(req.body.password, 8);
     const newUser = {
       ...req.body,
